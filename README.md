@@ -1,9 +1,9 @@
-# 🍜 Case Study No.1: Danny's Diner – Week 1
+#  Case Study No.1: Danny's Diner – Week 1
 
  Danny's Diner 
 
-This folder contains my SQL solutions for the **Danny's Diner** case study
-from the **8 Week SQL Challenge**.
+ my SQL solutions for the **Danny's Diner** case study.
+
 
 ## Topics Covered
 - Basic SQL queries
