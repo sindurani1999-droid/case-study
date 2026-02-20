@@ -1,85 +1,89 @@
-# 📊💳Data Bank SQL Case Study
+# 🍔 Foodie-Fi - SQL Case Study
+<img src= https://8weeksqlchallenge.com/images/case-study-designs/3.png >
 
-<img src= https://8weeksqlchallenge.com/images/case-study-designs/4.png >
-
-This project explores a fictional **Data Bank** system using SQL.  
-We have **three tables**: `regions`, `customers`, and `transactions`, with a variety of queries to extract insights about customer activities, transactions, and balances.
+## 🚀 About the Project
+This case study is focused on analyzing a fictional subscription-based streaming service, **Foodie-Fi**.  
+Inspired by **Danny Ma's #8WeekSQLChallenge**, it strengthens SQL querying, customer journey analysis, and business insights skills.
 
 ---
 
-## 🗄 Database Structure
+## 📂 Database and Tables
+**Database:** `Foodie_Fi`
 
-- **regions**: Contains the regions where customers are located.
-- **customers**: Links each customer to a region and node, along with their active dates.
-- **transactions**: Tracks all customer transactions (deposits, withdrawals, purchases).
+**Tables:**
+- `subscription_plans` – Subscription plan details (`plan_id`, `plan_name`, `price`)
+- `customer_subscriptions` – Customer journey tracking (`customer_id`, `plan_id`, `start_date`)
 
 ---
 
 ## Entity Relationship Diagram
 
-<img src= https://8weeksqlchallenge.com/images/case-study-4-erd.png >
+<img src= https://8weeksqlchallenge.com/images/case-study-3-erd.png >
 
 ***
 
-### Database and Tables Setup
+## 🛠️ Setup Instructions
 
-```sql
-CREATE DATABASE IF NOT EXISTS Data_Bank;
-USE Data_Bank;
+1. **Create the database and select it:**
+    ```sql
+    CREATE DATABASE IF NOT EXISTS Foodie_Fi;
+    USE Foodie_Fi;
+    ```
 
--- Create regions table
-CREATE TABLE regions (
-    region_id INTEGER PRIMARY KEY,
-    region_name VARCHAR(50)
-);
+2. **Create the tables:**
+    ```sql
+    CREATE TABLE subscription_plans (
+        plan_id INT PRIMARY KEY,
+        plan_name VARCHAR(50),
+        price DECIMAL(10,2) NULL
+    );
 
--- Create customers table
-CREATE TABLE customers (
-    customer_id INTEGER PRIMARY KEY,
-    region_id INTEGER,
-    node_id INTEGER,
-    start_date DATE,
-    end_date DATE,
-    FOREIGN KEY (region_id) REFERENCES regions(region_id)
-);
+    CREATE TABLE customer_subscriptions (
+        customer_id INT,
+        plan_id INT,
+        start_date DATE,
+        PRIMARY KEY (customer_id, start_date),
+        FOREIGN KEY (plan_id) REFERENCES subscription_plans(plan_id)
+    );
+    ```
 
--- Create transactions table
-CREATE TABLE transactions (
-    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT,
-    txn_date DATE,
-    txn_type VARCHAR(20),
-    txn_amount DECIMAL(10,2),
-    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
-);
-```
+3. **Insert sample data**:
+    - For `subscription_plans`
+    - For `customer_subscriptions`
+
+4. **Run the SQL queries** to solve business analysis questions.
+
 ---
 
 ## ❓ Business Questions Solved
 
-### A. 🧑‍💻 Customer Nodes Exploration
-1. **How many unique nodes are there on the Data Bank system?**
-2. **What is the number of nodes per region?**
-3. **How many customers are allocated to each region?**
-4. **How many days on average are customers reallocated to a different node?**
-5. **What is the median, 80th and 95th percentile for this same reallocation days metric for each region?**
+### A. 🧑‍💻 Customer Journey
+- View customers' plan history with start dates.
 
-### B. 💵 Customer Transactions
-1. **What is the unique count and total amount for each transaction type?**
-2. **What is the average total historical deposit counts and amounts for all customers?**
-3. **For each month - how many Data Bank customers make more than 1 deposit and either 1 purchase or 1 withdrawal in a single month?**
-4. **What is the closing balance for each customer at the end of the month?**
-5. **What is the percentage of customers who increase their closing balance by more than 5%?**
+### B. 📊 Data Analysis Questions
+1. **How many customers has Foodie-Fi ever had?**
+2. **Monthly distribution of trial plan start dates.**
+3. **Plan start dates after 2020, broken down by plan name.**
+4. **Customer count and percentage of churned customers.**
+5. **Customers who churned directly after the free trial.**
+6. **Plans customers moved to after the free trial (excluding churns).**
+7. **Plan distribution as of 2020-12-31.**
+8. **Number of customers who upgraded to an annual plan in 2020.**
+9. **Average days taken to upgrade to an annual plan.**
+10. **Breakdown of upgrade times to an annual plan in 30-day periods.**
+11. **Customers who downgraded from Pro Monthly to Basic Monthly in 2020.**
 
 ---
 
 ## 🧠 Skills Practiced
 - SQL Joins
 - Aggregations
-- Sub Query
+- Date Functions
 - CASE Statements
-- Windows Functions
-- Common Table Expression (CTE)
+- Customer Lifecycle Analysis
+- Business Metrics Interpretation
 
 ---
 
+## 📢 Credits
+Inspired by [Danny Ma's 8 Week SQL Challenge](https://8weeksqlchallenge.com/)
